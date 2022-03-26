@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraPointer : MonoBehaviour
+public class CameraPointerCustom : MonoBehaviour
 {
     private const float _maxDistance = 6;
     private GameObject _gazedAtObject = null;
