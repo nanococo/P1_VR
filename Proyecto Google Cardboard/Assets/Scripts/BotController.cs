@@ -6,16 +6,21 @@ public class BotController : MonoBehaviour
 {
 
     Animator myAnimator;
-    public AudioSource myAudio;
+    public AudioSource welcome;
+    public AudioSource explanation;
     private IEnumerator couroutine;
     private bool activateTalking;
     private bool talked;
+    private bool explained;
+    private bool finished;
     // Start is called before the first frame update
     void Start()
     {
         myAnimator = gameObject.GetComponent<Animator>();
         activateTalking = false;
         talked = false;
+        explained = false;
+        finished = false;
     }
 
     // Update is called once per frame
@@ -31,12 +36,21 @@ public class BotController : MonoBehaviour
         if (!talked){
             talked = true;
             setAnimationTalking();
-            myAudio.Play();
+            welcome.Play();
             yield return new WaitForSeconds(20f);
+            finished = true;
             setAnimationIdle();
         }
         else
-            yield return new WaitForSeconds(0f);
+            if (!explained && finished){
+            explained = true;
+            setAnimationTalking();
+            explanation.Play();
+            yield return new WaitForSeconds(70f);
+            setAnimationIdle();
+            }
+            else
+                yield return new WaitForSeconds(0f);
     }
 
     void setAnimationTalking(){

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraPointerCustom : MonoBehaviour
 {
-    private const float _maxDistance = 6;
+    private const float _maxDistance = 10;
     private GameObject _gazedAtObject = null;
 
     /// <summary>
