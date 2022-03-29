@@ -11,14 +11,8 @@ public class LookAndWalk : MonoBehaviour
 
     public bool moviendose;
 
-    public CharacterController myPersonaje;
-
     // Start is called before the first frame update
-    void Start()
-    {
-        myPersonaje = GetComponent<CharacterController>();
-
-    }
+    void Start() {}
 
     // Update is called once per frame
     void Update()
