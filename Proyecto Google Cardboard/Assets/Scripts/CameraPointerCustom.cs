@@ -21,16 +21,22 @@ public class CameraPointerCustom : MonoBehaviour
             if (_gazedAtObject != hit.transform.gameObject)
             {
                 // New GameObject.
-                _gazedAtObject?.SendMessage("OnPointerExit");
+               //_gazedAtObject?.SendMessage("OnPointerExit");
                 _gazedAtObject = hit.transform.gameObject;
-                _gazedAtObject?.SendMessage("OnPointerEnter");
+                _gazedAtObject?.SendMessage("CustomOnPointerEnter", SendMessageOptions.DontRequireReceiver);
             }
         }
         else
         {
             // No GameObject detected in front of the camera.
-            _gazedAtObject?.SendMessage("OnPointerExit");
+            _gazedAtObject?.SendMessage("CustomOnPointerExit", SendMessageOptions.DontRequireReceiver);
             _gazedAtObject = null;
+        }
+        
+        // Checks for screen touches.
+        if (Google.XR.Cardboard.Api.IsTriggerPressed)
+        {
+            _gazedAtObject?.SendMessage("CustomOnPointerClick", SendMessageOptions.DontRequireReceiver);
         }
     }
 }
