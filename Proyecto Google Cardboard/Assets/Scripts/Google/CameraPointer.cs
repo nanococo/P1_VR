@@ -24,7 +24,7 @@ using UnityEngine;
 /// </summary>
 public class CameraPointer : MonoBehaviour
 {
-    private const float _maxDistance = 10;
+    private const float _maxDistance = 25;
     private GameObject _gazedAtObject = null;
 
     /// <summary>
@@ -41,9 +41,12 @@ public class CameraPointer : MonoBehaviour
             if (_gazedAtObject != hit.transform.gameObject)
             {
                 // New GameObject.
-                _gazedAtObject?.SendMessage("CustomOnPointerExit");
-                _gazedAtObject = hit.collider.gameObject;
-                _gazedAtObject.SendMessage("CustomOnPointerEnter");
+                //_gazedAtObject?.SendMessage("CustomOnPointerExit");
+                //if (Google.XR.Cardboard.Api.IsTriggerPressed) {
+                    //Debug.Log("Pressed");
+                    _gazedAtObject = hit.collider.gameObject;
+                    _gazedAtObject.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);    
+                //}
             }
         }
         else
