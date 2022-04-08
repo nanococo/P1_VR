@@ -6,11 +6,16 @@ public class Option : MonoBehaviour
 
     public bool isCorrect;
     public GameObject txt;
+    public GameObject questionController;
+
+    private bool active;
+    private bool selected;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        active = false;
+        selected = false;
     }
 
     // Update is called once per frame
@@ -20,19 +25,34 @@ public class Option : MonoBehaviour
     }
 
     public void CustomOnPointerEnter() {
-        if (isCorrect) {
-            Debug.Log("Correct");
-        }
-        else {
-            Debug.Log("Incorrect");
-        }
-
+        if(active){
+            if (isCorrect) {
+                Debug.Log("Correct");
+            }
+            else {
+                Debug.Log("Incorrect");
+            }
+       }
     }
 
     public void CustomOnPointerExit() {
     }
 
     public void SelectOption() {
-        txt.GetComponent<Text>().color = isCorrect ? Color.green : Color.red;
+        if(active && !selected){
+            if(isCorrect){
+                txt.GetComponent<Text>().color = Color.green;
+                questionController.SendMessage("correctAnswer");
+            }
+            else{
+                txt.GetComponent<Text>().color = Color.red;
+                questionController.SendMessage("incorrectAnswer");
+            }
+            selected = true;
+        }
+    }
+
+    public void activate(){
+        active = true;
     }
 }
