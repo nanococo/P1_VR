@@ -13,11 +13,13 @@ public class LookAndWalk : MonoBehaviour
 
     public CharacterController myPersonaje;
 
+    private bool blocked;
+
     // Start is called before the first frame update
     void Start()
     {
         myPersonaje = GetComponent<CharacterController>();
-
+        blocked = true;
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class LookAndWalk : MonoBehaviour
             moviendose = false;
         }
 
-        if (moviendose)
+        if (moviendose && !blocked)
         {
             Vector3 forward = vrCamera.transform.forward;
             forward *= speed * Time.deltaTime;
@@ -40,5 +42,13 @@ public class LookAndWalk : MonoBehaviour
             //myPersonaje.SimpleMove(forward);
             transform.position += forward;
         }
+    }
+
+    public void block(){
+        blocked = true;
+    }
+
+    public void unblock(){
+        blocked = false;
     }
 }

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c5c1a5a41cc221642ad2a76193c50460
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - menu: {instanceID: 0}
+  - secondCanvas: {instanceID: 0}
+  - NormalTexture: {fileID: 2800000, guid: 8a6f536f4b2392f40afb62df609f6e40, type: 3}
+  - ActiveTexture: {fileID: 2800000, guid: 03cbfa7fbded80a479f24add4a997757, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

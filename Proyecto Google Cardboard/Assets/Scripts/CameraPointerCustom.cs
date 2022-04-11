@@ -1,10 +1,11 @@
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraPointerCustom : MonoBehaviour
 {
-    private const float _maxDistance = 20;
+    private const float _maxDistance = 15;
     private GameObject _gazedAtObject = null;
 
     /// <summary>
@@ -20,10 +21,10 @@ public class CameraPointerCustom : MonoBehaviour
             // GameObject detected in front of the camera.
             if (_gazedAtObject != hit.transform.gameObject)
             {
-                // New GameObject.
-               //_gazedAtObject?.SendMessage("OnPointerExit");
+                _gazedAtObject?.SendMessage("CustomOnPointerExit", SendMessageOptions.DontRequireReceiver);
                 _gazedAtObject = hit.transform.gameObject;
                 _gazedAtObject?.SendMessage("CustomOnPointerEnter", SendMessageOptions.DontRequireReceiver);
+                UnityEngine.Debug.Log(_gazedAtObject.name);
             }
         }
         else
@@ -36,6 +37,7 @@ public class CameraPointerCustom : MonoBehaviour
         // Checks for screen touches.
         if (Google.XR.Cardboard.Api.IsTriggerPressed)
         {
+            UnityEngine.Debug.Log("touch");
             _gazedAtObject?.SendMessage("CustomOnPointerClick", SendMessageOptions.DontRequireReceiver);
         }
     }

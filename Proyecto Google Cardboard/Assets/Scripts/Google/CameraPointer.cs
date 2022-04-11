@@ -42,17 +42,19 @@ public class CameraPointer : MonoBehaviour
             {
                 // New GameObject.
                 //_gazedAtObject?.SendMessage("CustomOnPointerExit");
+                _gazedAtObject = hit.collider.gameObject;
                 //if (Google.XR.Cardboard.Api.IsTriggerPressed) {
-                    //Debug.Log("Pressed");
-                    _gazedAtObject = hit.collider.gameObject;
+                   // Debug.Log("Pressed");
                     _gazedAtObject.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);    
                 //}
+                _gazedAtObject.SendMessage("gazedAt", SendMessageOptions.DontRequireReceiver);    
             }
         }
         else
         {
             // No GameObject detected in front of the camera.
             //_gazedAtObject?.SendMessage("OnPointerExit");
+            _gazedAtObject?.SendMessage("notGazedAt", SendMessageOptions.DontRequireReceiver);
             _gazedAtObject = null;
         }
 

@@ -7,12 +7,6 @@ public class QuestionBotController : MonoBehaviour
     // Start is called before the first frame update
     Animator myAnimator;
 
-    public AudioSource Question;
-
-    public AudioSource CorrectAnswer;
-
-    private IEnumerator coroutine;
-
     void Start()
     {
         myAnimator = gameObject.GetComponent<Animator>();

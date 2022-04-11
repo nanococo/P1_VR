@@ -3,7 +3,11 @@ guid: 2ea1875dbe033ad45aca2ee07c9ffae3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - txt: {instanceID: 0}
+  - questionController: {instanceID: 0}
+  - NormalTexture: {fileID: 2800000, guid: 8a6f536f4b2392f40afb62df609f6e40, type: 3}
+  - ActiveTexture: {fileID: 2800000, guid: 03cbfa7fbded80a479f24add4a997757, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

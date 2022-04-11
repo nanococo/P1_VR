@@ -23,7 +23,9 @@ public class QuestionController : MonoBehaviour
 
     public AudioSource CorrectAnswer;
 
-      public AudioSource IncorrectAnswer;
+    public AudioSource IncorrectAnswer;
+
+    public GameObject player;
 
     private IEnumerator couroutine;
     private bool active;
@@ -39,28 +41,24 @@ public class QuestionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(active){
+        if(active && !talked){
+            talked = true;
             couroutine = askQuestion();
             StartCoroutine(couroutine);
         }
     }
 
     private IEnumerator askQuestion(){
-        if (!talked){
-            talked = true;
-            bot.SendMessage("talking");
-            Question.Play();
-            yield return new WaitForSeconds(Question.clip.length);
-            bot.SendMessage("finishedTalking");
-            myCollider.enabled = false;
-            Option1.SendMessage("activate");
-            Option2.SendMessage("activate");
-            Option3.SendMessage("activate");
-            Option4.SendMessage("activate");
-        }
-        else{
-            yield return new WaitForSeconds(0f);
-        }
+        player.SendMessage("block");
+        bot.SendMessage("talking");
+        Question.Play();
+        yield return new WaitForSeconds(Question.clip.length);
+        bot.SendMessage("finishedTalking");
+        myCollider.enabled = false;
+        Option1.SendMessage("activate");
+        Option2.SendMessage("activate");
+        Option3.SendMessage("activate");
+        Option4.SendMessage("activate");
     }
 
     
@@ -79,12 +77,17 @@ public class QuestionController : MonoBehaviour
     }
 
     private IEnumerator correctAnswerCouroutine(){
-        DoorLeftAnimator.SetBool("openDoor", true);
-        DoorRightAnimator.SetBool("openDoor", true);
+        Option1.SendMessage("deactivate");
+        Option2.SendMessage("deactivate");
+        Option3.SendMessage("deactivate");
+        Option4.SendMessage("deactivate");
         bot.SendMessage("talking");
         CorrectAnswer.Play();
         yield return new WaitForSeconds(CorrectAnswer.clip.length);
         bot.SendMessage("finishedTalking");
+        DoorLeftAnimator.SetBool("openDoor", true);
+        DoorRightAnimator.SetBool("openDoor", true);
+        player.SendMessage("unblock");
     }
 
     public void incorrectAnswer(){
