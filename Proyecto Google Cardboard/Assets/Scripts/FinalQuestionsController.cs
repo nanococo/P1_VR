@@ -19,6 +19,8 @@ public class FinalQuestionsController : MonoBehaviour
 
     public AudioSource CorrectAnswerFinalFifth;
 
+    public GameObject teleporter;
+    
     private int last_answer;
 
     private bool talkedCorrectAnswer;
@@ -75,7 +77,7 @@ public class FinalQuestionsController : MonoBehaviour
         if(!talkedCorrectAnswerFinal){
             if(last_answer == 4){
                 DoorLeftAnimator.SetBool("openDoor", true);
-            DoorRightAnimator.SetBool("openDoor", true);
+                DoorRightAnimator.SetBool("openDoor", true);
                 talkedCorrectAnswerFinal = true;
                 fourth_bot.SendMessage("talking");
                 CorrectAnswerFinalFourth.Play();
@@ -93,6 +95,7 @@ public class FinalQuestionsController : MonoBehaviour
                 fifth_bot.SendMessage("finishedTalking");
                 player.SendMessage("unblock");
             }
+            teleporter.GetComponent<CustomTeleporter>().teleportPadOn = true;
         }
     }
 

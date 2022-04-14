@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-public class CustomTeleporter : MonoBehaviour
-{
+public class CustomTeleporter : MonoBehaviour {
+	
+	public int scene;
+	
 	//teleport instantly upon entering trigger?
 	public bool instantTeleport;
 	//teleport to a random pad?
@@ -38,7 +40,7 @@ public class CustomTeleporter : MonoBehaviour
 	public AudioSource teleportPadSound;
 	//simple enable/disable function in case you want the teleport not working at some point
 	//without disabling the entire script, so receiving objects still works
-	public bool teleportPadOn = true;
+	public bool teleportPadOn;
 
 	void Start ()
 	{
@@ -60,7 +62,7 @@ public class CustomTeleporter : MonoBehaviour
 
 	void Teleport()
 	{
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(scene);
 	}
 
 	void OnTriggerEnter(Collider trig)
