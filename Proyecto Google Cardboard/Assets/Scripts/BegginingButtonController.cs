@@ -45,14 +45,12 @@ public class BegginingButtonController : MonoBehaviour
     }
 
     public void gazedAt() {
-        UnityEngine.Debug.Log("entraa");
         if(active && !selected){
             image.texture = ActiveTexture;
         }
     }
 
-    public void CustomOnPointerExit() {
-        UnityEngine.Debug.Log("entra");
+    public void notGazedAt() {
         image.texture = NormalTexture;
     }
 }

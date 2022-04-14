@@ -41,13 +41,10 @@ public class CameraPointer : MonoBehaviour
             if (_gazedAtObject != hit.transform.gameObject)
             {
                 // New GameObject.
-                //_gazedAtObject?.SendMessage("CustomOnPointerExit");
+                _gazedAtObject?.SendMessage("notGazedAt", SendMessageOptions.DontRequireReceiver);
                 _gazedAtObject = hit.collider.gameObject;
-                //if (Google.XR.Cardboard.Api.IsTriggerPressed) {
-                   // Debug.Log("Pressed");
-                    _gazedAtObject.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);    
-                //}
                 _gazedAtObject.SendMessage("gazedAt", SendMessageOptions.DontRequireReceiver);    
+                //_gazedAtObject?.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);   
             }
         }
         else
@@ -59,9 +56,9 @@ public class CameraPointer : MonoBehaviour
         }
 
         // Checks for screen touches.
-        if (Google.XR.Cardboard.Api.IsTriggerPressed)
-        {
-            _gazedAtObject?.SendMessage("CustomOnPointerClick");
+       if (Google.XR.Cardboard.Api.IsTriggerPressed) {
+            UnityEngine.Debug.Log("Pressed");
+            _gazedAtObject?.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);    
         }
     }
 }

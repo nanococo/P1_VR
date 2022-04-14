@@ -87,6 +87,7 @@ public class QuestionController : MonoBehaviour
         bot.SendMessage("finishedTalking");
         DoorLeftAnimator.SetBool("openDoor", true);
         DoorRightAnimator.SetBool("openDoor", true);
+        myCollider.enabled = true;
         player.SendMessage("unblock");
     }
 

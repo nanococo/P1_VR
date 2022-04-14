@@ -7,31 +7,39 @@ public class LookAndWalk : MonoBehaviour
     public Transform vrCamera;
     public float puntolimite = 10.0f;
 
+    public float puntolimiteatras = 350;
+
     public float speed = 0.5f;
 
     public bool moviendose;
+    public bool moviendoseAtras;
 
     public CharacterController myPersonaje;
 
-    private bool blocked;
+    public bool blocked = true;
 
     // Start is called before the first frame update
     void Start()
     {
         myPersonaje = GetComponent<CharacterController>();
-        blocked = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (vrCamera.eulerAngles.x >= puntolimite && vrCamera.eulerAngles.x < 90.0f)
+        if (vrCamera.eulerAngles.x >= puntolimite && vrCamera.eulerAngles.x < 80.0f)
         {
+            moviendoseAtras = false;
             moviendose = true;
         }
-        else
-        {
+        //else if (vrCamera.eulerAngles.x <= puntolimiteatras && vrCamera.eulerAngles.x > 280)
+        //{
+        //    moviendose = false;
+        //    moviendoseAtras = true;
+        //}
+        else{
             moviendose = false;
+            moviendoseAtras = false;
         }
 
         if (moviendose && !blocked)
@@ -41,6 +49,15 @@ public class LookAndWalk : MonoBehaviour
             forward.y = 0f;
             //myPersonaje.SimpleMove(forward);
             transform.position += forward;
+        }
+
+        if (moviendoseAtras && !blocked)
+        {
+            Vector3 forward = vrCamera.transform.forward;
+            forward *= speed * Time.deltaTime;
+            forward.y = 0f;
+            //myPersonaje.SimpleMove(forward);
+            transform.position -= forward;
         }
     }
 

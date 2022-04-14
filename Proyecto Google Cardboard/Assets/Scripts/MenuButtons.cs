@@ -29,6 +29,7 @@ public class MenuButtons : MonoBehaviour
     public void SelectOption() {
         menu.SetActive(false);
         secondCanvas.SetActive(true);
+        image.texture = NormalTexture;
     }
 
     public void gazedAt() {

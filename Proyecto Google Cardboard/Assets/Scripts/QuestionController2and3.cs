@@ -73,6 +73,7 @@ public class QuestionController2and3 : MonoBehaviour
         Option2.SendMessage("deactivate");
         Option3.SendMessage("deactivate");
         Option4.SendMessage("deactivate");
+        myCollider.enabled = true;
         FinalQuestionsController.SendMessage("QuestionAnswered", bot_number);
     }
 
