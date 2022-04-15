@@ -63,14 +63,8 @@ public class SpaceShipQuestionController : MonoBehaviour {
 
     private IEnumerator NextSteps() {
         var finalQuestionControllerSpaceship = finalQuestionController.GetComponent<FinalQuestionControllerSpaceship>();
-        if (finalQuestionControllerSpaceship.GetAnswersCount()>=3) {
-            coroutine = NarrateFinalSteps();
-        }
-        else {
-            finalQuestionController.GetComponent<FinalQuestionControllerSpaceship>().IncrementAnswer();
-            coroutine = NarrateNextSteps();
-        }
-
+        finalQuestionController.GetComponent<FinalQuestionControllerSpaceship>().IncrementAnswer();
+        coroutine = finalQuestionControllerSpaceship.GetAnswersCount()>=3 ? NarrateFinalSteps() : NarrateNextSteps();
         return coroutine;
     }
 
@@ -88,8 +82,7 @@ public class SpaceShipQuestionController : MonoBehaviour {
         nextBotIndications.Play();
         yield return new WaitForSeconds(nextBotIndications.clip.length);
         bot.SendMessage("finishedTalking");
-        coroutine = NextSteps();
-        StartCoroutine(coroutine);
+        player.SendMessage("unblock");
     }
 
     private IEnumerator NarrateFinalSteps() {
@@ -97,11 +90,15 @@ public class SpaceShipQuestionController : MonoBehaviour {
         finalIndications.Play();
         yield return new WaitForSeconds(finalIndications.clip.length);
         bot.SendMessage("finishedTalking");
-        coroutine = NextSteps();
-        StartCoroutine(coroutine);
+        player.SendMessage("unblock");
     }
 
     public void incorrectAnswer(){
+        Option1.SendMessage("deactivate");
+        Option2.SendMessage("deactivate");
+        Option3.SendMessage("deactivate");
+        Option4.SendMessage("deactivate");
+        _boxCollider.enabled = true;
         coroutine = incorrectAnswerCoroutine();
         StartCoroutine(coroutine);
     }
@@ -111,6 +108,11 @@ public class SpaceShipQuestionController : MonoBehaviour {
         wrongAnswer.Play();
         yield return new WaitForSeconds(wrongAnswer.clip.length);
         bot.SendMessage("finishedTalking");
+        Option1.SendMessage("activate");
+        Option2.SendMessage("activate");
+        Option3.SendMessage("activate");
+        Option4.SendMessage("activate");
+        _boxCollider.enabled = false;
     }
     
     public void CustomOnPointerEnter(){

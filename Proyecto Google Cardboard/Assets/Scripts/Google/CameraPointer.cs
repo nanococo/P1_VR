@@ -44,7 +44,7 @@ public class CameraPointer : MonoBehaviour
                 _gazedAtObject?.SendMessage("notGazedAt", SendMessageOptions.DontRequireReceiver);
                 _gazedAtObject = hit.collider.gameObject;
                 _gazedAtObject.SendMessage("gazedAt", SendMessageOptions.DontRequireReceiver);    
-                //_gazedAtObject?.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);   
+                _gazedAtObject?.SendMessage("SelectOption", SendMessageOptions.DontRequireReceiver);   
             }
         }
         else
