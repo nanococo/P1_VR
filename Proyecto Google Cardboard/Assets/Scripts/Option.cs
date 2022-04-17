@@ -47,13 +47,13 @@ public class Option : MonoBehaviour
     public void SelectOption() {
         if(active && !selected){
             if(isCorrect){
-                txt.GetComponent<Text>().color = Color.green;
                 image.texture = NormalTexture;
+                image.color = Color.green;
                 questionController.SendMessage("correctAnswer");
             }
             else{
-                txt.GetComponent<Text>().color = Color.red;
                 image.texture = NormalTexture;
+                image.color = Color.red;
                 questionController.SendMessage("incorrectAnswer");
             }
             selected = true;
