@@ -15022,6 +15022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleport: {fileID: 1080299103}
+  wall: {fileID: 1747737133}
 --- !u!4 &2137865485
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ public class FinalQuestionControllerSpaceship : MonoBehaviour {
     // Start is called before the first frame update
 
     public GameObject teleport;
+    public GameObject wall;
     private int _answersCount;
 
     
@@ -23,6 +24,7 @@ public class FinalQuestionControllerSpaceship : MonoBehaviour {
         _answersCount++;
         if (_answersCount >= 3) {
             teleport.GetComponent<CustomTeleporter>().teleportPadOn = true;
+            wall.SetActive(false);
         }
     }
 
